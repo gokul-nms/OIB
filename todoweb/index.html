@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  margin: 10;
+  min-width: 200px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+ul {
+  margin: 1;
+  padding:0;
+}
+
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 10px 12px 40px;
+  list-style-type: none;
+  background: #04ffff;
+  font-size: 25px;
+  transition: 0.10s;
+ 
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+
+ul li:nth-child(odd) {
+  background: #05dbd1e0;
+}
+
+ul li:hover {
+  background: #07bbbb;
+}
+
+ul li.checked {
+  background: #07969b;
+  color: #c1bae4;
+  text-decoration: line-through;
+}
+
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #efff12;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+.close:hover {
+  background-color: #5b35e2;
+  color: white;
+}
+
+
+.header {
+  background-color: #190e7c;
+  padding: 30px 40px;
+  color: rgb(0, 255, 221);
+  text-align: center;
+}
+
+
+.header:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  width: 75%;
+  padding: 10px;
+  float: left;
+  font-size: 16px;
+}
+
+.addBtn {
+  padding: 10px;
+  width: 25%;
+  background: #ff0404;
+  color: #fffb00;
+  float: left;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 0;
+}
+
+.addBtn:hover {
+  background-color: #9e2121;
+}
+</style>
+</head>
+<body>
+
+<div id="myDIV" class="header">
+  <h1 style="margin:5px">TO-DO WEB </h1
+    >
+  <h4 style="margin-left: 5px">Input Your Data below text bar and click to store the data </h4>
+  <input type="text" id="myInput" placeholder="Add Your Text Here ...">
+  <span onclick="newElement()" class="addBtn">CLICK TO STORE</span>
+</div>
+
+<ul id="myUL">
+  <li>Meditate at Morning</li>
+  <li class="checked">Coordinate the meeting</li>
+  <li>Call Teammates</li>
+  <li>Pick an order</li>
+  <li>Walking with pet</li>
+  <li>Dinner with Friends</li>
+</ul>
+
+<script>
+
+var myNodelist = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < myNodelist.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  myNodelist[i].appendChild(span);
+}
+
+
+var close = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < close.length; i++) {
+  close[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("Unable to add... Please write something !");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
