@@ -1,0 +1,3 @@
+#logindetails
+username : oasisinfobyte
+password : password
